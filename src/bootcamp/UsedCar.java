@@ -6,7 +6,7 @@ package bootcamp;
 public class UsedCar extends Car {
 
     private double mileage;
-    
+
 
     public UsedCar(String make, String model, int year, double price){
         super(make, model, year, price);
