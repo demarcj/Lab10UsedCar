@@ -56,6 +56,6 @@ public class Car {
     }
 
     public String toString() {
-        return make + " " + model + " " + year + " $" + price;
+        return make + "\t" + model + "\t\t" + year + "\t $" + price;
     }
 }

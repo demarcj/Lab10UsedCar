@@ -9,38 +9,55 @@ import java.util.Scanner;
 public class CarApp {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        getCars(scan, "Welcome to the Grand Circus Motors admin console!");
-        System.out.println("Thank you!");
+        ArrayList<Car> carList = getCars("Welcome to the DeMarc Johnson Motors console!");
+        System.out.println(choiceCars(scan, carList));
         scan.close();
     }
 
-    public static void getCars(Scanner scan, String salutation){
+    public static ArrayList getCars(String salutation){
         System.out.println(salutation);
-        System.out.println("How many cars are enter: ");
-        int input = scan.nextInt();
         ArrayList<Car> carList = new ArrayList<Car>();
-
-        for(int i = 0; i < input; i++){
-            System.out.println("Enter the car make: ");
-            String car = scan.next();
-            scan.nextLine();
-
-            System.out.println("Enter the car model: ");
-            String model = scan.nextLine();
-
-            System.out.println("Enter the car year: ");
-            int year = scan.nextInt();
-
-            System.out.println("Enter the car price: ");
-            double price = scan.nextDouble();
-
-            Car cars = new Car(car, model, year, price);
-
-            carList.add(cars);
-        }
-        for(Car cars: carList){
-            System.out.println(cars);
-            System.out.println("");
-        }
+        	
+        Car car1 = new Car("Nikolai", "Model S", 2017, 54999.90);
+        Car car2 = new Car("Ford", "Escapade", 2017, 54999.90);
+        Car car3 = new Car("Chewie", "Vette", 2017, 54999.90);
+        Car car4 = new UsedCar("Hyonda", "Prior", 2015, 54999.90, 35987.6);
+        Car car5 = new UsedCar("Grand", "Chirpus", 2013, 54999.90, 12345.0);
+        Car car6 = new UsedCar("Ponitac", "Witherell", 2016, 54999.90, 3500.3);
+        carList.add(car1);
+        carList.add(car2);
+        carList.add(car3);
+        carList.add(car4);
+        carList.add(car5);
+        carList.add(car6);
+            return carList;
+    }
+    
+    public static String choiceCars(Scanner scan, ArrayList<Car> carList){
+    	String buy = "";
+    	int input = 0;
+    	do{
+    		System.out.println("Type in a number to pick a car.");
+    		for(int i = 0; i < carList.size(); i++){
+    			System.out.println((i + 1) + ". " + carList.get(i));
+    			if(i == carList.size() - 1){
+    				System.out.println((i + 2) + ". Quit");
+    				System.out.println("Which car would you like? Pick a number:");
+    				input = scan.nextInt();
+    				while(input < 1 || input > carList.size() + 1){
+    					System.out.println("Please only a number from 1 to " + (carList.size() + 1));
+    					input = scan.nextInt();
+    				}
+    				if(input == carList.size() + 1){
+    					return "Thank You!";
+    				}
+    				System.out.println(carList.get(input - 1));
+    				System.out.println("Would you like to buy this car? Yes or no.");
+    				buy = scan.next();
+    	    		carList.remove(input - 1);
+    			}
+    		}
+    	}while(buy.equalsIgnoreCase("yes"));
+    		return "Thank You!";
     }
 }
