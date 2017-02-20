@@ -14,6 +14,7 @@ public class CarApp {
         scan.close();
     }
 
+    //This is the car data for the Car and UsedCar class
     public static ArrayList getCars(String salutation){
         System.out.println(salutation);
         ArrayList<Car> carList = new ArrayList<Car>();
@@ -36,21 +37,27 @@ public class CarApp {
     public static String choiceCars(Scanner scan, ArrayList<Car> carList){
     	String buy = "";
     	int input = 0;
-    	do{
+    	do{//This allow the user to see and buy a car from the lot
     		System.out.println("Type in a number to pick a car.");
     		for(int i = 0; i < carList.size(); i++){
     			System.out.println((i + 1) + ". " + carList.get(i));
     			if(i == carList.size() - 1){
     				System.out.println((i + 2) + ". Quit");
     				System.out.println("Which car would you like? Pick a number:");
-    				input = scan.nextInt();
+
+    				//This is a validation to check and make sure user input a number
+    				input = checkInt(scan, carList);
+
     				while(input < 1 || input > carList.size() + 1){
     					System.out.println("Please only a number from 1 to " + (carList.size() + 1));
     					input = scan.nextInt();
     				}
+
+    				//If the user pick the quit option this will exit out of the program
     				if(input == carList.size() + 1){
     					return "Thank You!";
     				}
+
     				System.out.println(carList.get(input - 1));
     				System.out.println("Would you like to buy this car? Yes or no.");
     				buy = scan.next();
@@ -65,6 +72,25 @@ public class CarApp {
     			}
     		}
     	}while(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"));
+    	//This do-while will repeat the program if the user decided to not quit
     		return "Thank You!";
+    }
+
+    public static int checkInt(Scanner scan, ArrayList<Car> carList){
+        int input = 0;
+        while(!scan.hasNextInt()){
+            System.out.println("That's not an number!");
+            for(int i = 0; i < carList.size(); i++) {
+                System.out.println((i + 1) + ". " + carList.get(i));
+                if(i == carList.size() - 1) {
+                    System.out.println((i + 2) + ". Quit");
+                }
+            }
+            System.out.println("Which car would you? Pick a number: ");
+            scan.nextLine();
+        }
+        input = scan.nextInt();
+        scan.nextLine();
+        return input;
     }
 }
