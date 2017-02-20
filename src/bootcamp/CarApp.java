@@ -19,11 +19,11 @@ public class CarApp {
         ArrayList<Car> carList = new ArrayList<Car>();
         	
         Car car1 = new Car("Nikolai", "Model S", 2017, 54999.90);
-        Car car2 = new Car("Ford", "Escapade", 2017, 54999.90);
-        Car car3 = new Car("Chewie", "Vette", 2017, 54999.90);
-        Car car4 = new UsedCar("Hyonda", "Prior", 2015, 54999.90, 35987.6);
-        Car car5 = new UsedCar("Grand", "Chirpus", 2013, 54999.90, 12345.0);
-        Car car6 = new UsedCar("Ponitac", "Witherell", 2016, 54999.90, 3500.3);
+        Car car2 = new Car("Ford", "Escapade", 2017, 31999.90);
+        Car car3 = new Car("Chewie", "Vette", 2017, 44989.95);
+        Car car4 = new UsedCar("Hyonda", "Prior", 2015, 14795.50, 35987.6);
+        Car car5 = new UsedCar("Grand", "Chirpus", 2013, 8500.00, 12345.0);
+        Car car6 = new UsedCar("Ponitac", "Witherell", 2016, 14450.00, 3500.3);
         carList.add(car1);
         carList.add(car2);
         carList.add(car3);
@@ -54,10 +54,17 @@ public class CarApp {
     				System.out.println(carList.get(input - 1));
     				System.out.println("Would you like to buy this car? Yes or no.");
     				buy = scan.next();
-    	    		carList.remove(input - 1);
+    				if(buy.equalsIgnoreCase("yes")) {
+                        carList.remove(input - 1);
+                    }
+                    while(!(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"))){
+                        System.out.println("That is not a valid answer!");
+                        System.out.println("Would you like to buy this car? Yes or no.");
+                        buy = scan.next();
+                    }
     			}
     		}
-    	}while(buy.equalsIgnoreCase("yes"));
+    	}while(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"));
     		return "Thank You!";
     }
 }
