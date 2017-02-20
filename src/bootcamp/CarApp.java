@@ -59,21 +59,34 @@ public class CarApp {
     				}
 
     				System.out.println(carList.get(input - 1));
-    				System.out.println("Would you like to buy this car? Yes or no.");
-    				buy = scan.next();
-    				if(buy.equalsIgnoreCase("yes")) {
-                        carList.remove(input - 1);
-                    }
-                    while(!(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"))){
-                        System.out.println("That is not a valid answer!");
-                        System.out.println("Would you like to buy this car? Yes or no.");
-                        buy = scan.next();
+
+    				//This will ask if the user wants to buy a car
+    				buy = buyerOption(scan, carList, input , "Would you like to buy this car? Yes or no.");
+    				if(carList.size() == 0){
+                        return "Sorry, we ran are out of car!";
                     }
     			}
     		}
     	}while(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"));
     	//This do-while will repeat the program if the user decided to not quit
     		return "Thank You!";
+    }
+
+    public static String buyerOption(Scanner scan, ArrayList<Car> carList, int input, String question){
+        String buy = "";
+        System.out.println(question);
+        buy = scan.next();
+
+        //If user decides to buy the car then this if statement will remove from the list
+        if(buy.equalsIgnoreCase("yes")) {
+            carList.remove(input - 1);
+        }
+        while(!(buy.equalsIgnoreCase("yes") || buy.equalsIgnoreCase("no"))){
+            System.out.println("That is not a valid answer!");
+            System.out.println("Would you like to buy this car? Yes or no.");
+            buy = scan.next();
+        }
+        return buy;
     }
 
     public static int checkInt(Scanner scan, ArrayList<Car> carList){
