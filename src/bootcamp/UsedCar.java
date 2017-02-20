@@ -14,6 +14,6 @@ public class UsedCar extends Car {
     }
 
     public String toString() {
-        return super.toString() + " (Used) " + mileage + " miles";
+        return super.toString() + " (Used)\t " + mileage + " miles";
     }
 }
