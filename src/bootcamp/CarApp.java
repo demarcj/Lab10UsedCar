@@ -62,6 +62,8 @@ public class CarApp {
 
     				//This will ask if the user wants to buy a car
     				buy = buyerOption(scan, carList, input , "Would you like to buy this car? Yes or no.");
+
+    				//This will exit if there is no more cars left
     				if(carList.size() == 0){
                         return "Sorry, we ran are out of car!";
                     }
